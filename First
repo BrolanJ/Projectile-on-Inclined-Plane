@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb  8 00:26:31 2018
+
+@author: Brolan
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+print('')
+print('Hello! Let us find the time and place at which the projectile will hit the ramp.')
+print('')
+print('First, what is the initial speed of the projectile?')
+v0 = float(input('Initial Speed (m/s): '))
+print('')
+print('At what angle is the plane oriented above the horizontal?')
+theta= float(input('Plane angle (degrees): '))
+print('')
+print('At what angle above the plane is the projectile oriented?')
+phi= float(input('Launch angle (degrees): '))
+tx=((2*v0*(np.sin(np.radians(theta+phi))-np.sin(np.radians(theta))
+))/9.81) #Time at which projectile hits ramp
+t = np.arange(0, tx+(.1*tx), .01)
+
+x=(v0*np.sin(np.radians(theta+phi))*t)-4.905*t**2 #Projectile vertical range
+d=v0*t*np.sin(np.radians(theta)) #Ramp Distance
+
+plt.plot(t,x,label='Path',)
+plt.plot(t,d,label='Ramp')
+
+plt.xlabel('Time (seconds)')
+plt.ylabel('Range (meters)')
+plt.legend()
+print('')
+print('Time at which Projectile Hits:',tx)
+print('Distance Travelled Along Ramp at Impact:',tx*v0)
+print('Distance Travelled Horizontal:',tx*v0*np.cos(np.radians(theta)))
+print('Distance Travelled Vertical:',tx*v0*np.sin(np.radians(theta)))
+#((2*v0*(np.sin(np.radians(theta+phi))-np.sin(np.radians(theta))))/9.81)
